@@ -1,10 +1,14 @@
 
+
+export type PackageNames = 'BE' | 'FAE' | 'UI';
+
 export interface GewerkSettings {
-  name: string
-  nameShort: string
-  color: string
-  value: number
+  name: string;
+  nameShort: PackageNames;
+  color: string;
+  value: number;
 }
+
 export const gewerkOptions: GewerkSettings[] = [
   {
     name: 'Backend',
@@ -16,7 +20,7 @@ export const gewerkOptions: GewerkSettings[] = [
     name: 'FAE',
     nameShort: 'FAE',
     color: '#89BD9E',
-    value: 50
+    value: 60
   },
   {
     name: 'UI/UX',

@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React from 'react';
 
 import {
   AnimatedAxis, // any of these can be non-animated equivalents
@@ -6,78 +6,25 @@ import {
   AnimatedLineSeries,
   XYChart,
   Tooltip,
-  DataProvider, DataContext
+  DataProvider, DataContext, buildChartTheme, lightTheme
 } from '@visx/xychart';
 
-import {LegendOrdinal} from '@visx/legend';
-import {AllData, Data, WorkPackages} from "./interfaces";
+import {Data} from "./interfaces";
+import {GewerkSettings} from "../config";
+import {buildDataLinear, buildDataNonLinear} from "./functions";
+import {ChartLegend} from "./Chart-Legend";
 
-
-
-const buildData = (_countPoints: number, _workPackages: WorkPackages): AllData[] => {
-  return Array.from({length: _countPoints})
-    .reduce<AllData[]>((array: AllData[], _: undefined, index: number) => {
-      const before: AllData | undefined = array[index - 1];
-
-      // be
-      const beforeBe = before && before.be ? before.be : 0;
-      const doingBe: number = _workPackages.be / _countPoints;
-      const valBe: number = beforeBe + doingBe;
-
-      // fae
-      const beforeFae = before && before.fae ? before.fae : 0;
-      const left = _workPackages.fae - beforeFae;
-      const doingFae: number = left / 20;
-      const valFe: number = beforeFae + doingFae;
-
-      // ui
-      const beforeUi = before && before.ui ? before.ui : 0;
-      const leftUi = _workPackages.ui - beforeUi;
-      const doingUi: number = leftUi / 5;
-      const valUi: number = beforeUi + doingUi;
-
-      return [
-        ...array,
-        {
-          x: index,
-          fae: valFe,
-          be: valBe,
-          ui: valUi,
-        }
-      ];
-    }, []);
-}
 
 const accessors = {
   xAccessor: (d) => d.x,
   yAccessor: (d) => d.y,
+
 };
 
-const ChartLegend = () => {
-  const { colorScale, theme, margin } = useContext(DataContext);
-  return (
-    <LegendOrdinal
-      direction="row"
-      itemMargin="8px 8px 8px 0"
-      scale={colorScale}
-      // labelFormat={(label) => label.replace("-", " ")}
-      legendLabelProps={{ color: "white" }}
-      shape="line"
-      style={{
-        backgroundColor: theme.backgroundColor,
-        marginBottom: -24,
-        paddingLeft: margin.left,
-        display: 'flex', // requir
-      }}
-    />
-  );
-};
-
-export const LineChart = ({countPoints, workPackages}) => {
+export const LineChart = ({countPoints, workPackages, linear}: {countPoints: number,workPackages: GewerkSettings[] , linear: boolean }) => {
 
 
-
-  const DATA = buildData(countPoints, workPackages);
+  const DATA = linear ? buildDataLinear(countPoints, workPackages) : buildDataNonLinear(countPoints, workPackages);
 
   const UI_DATA: Data[] = DATA.map(d => ({
     x: d.x,
@@ -94,6 +41,11 @@ export const LineChart = ({countPoints, workPackages}) => {
     y: d.be
   }))
 
+  const beColor = workPackages.find(w => w.nameShort === "BE").color;
+  const faeColor = workPackages.find(w => w.nameShort === "FAE").color;
+  const uiColor = workPackages.find(w => w.nameShort === "UI").color;
+
+
   return (
     <DataProvider
       // these props have been moved from XYChart to DataProvider
@@ -104,6 +56,12 @@ export const LineChart = ({countPoints, workPackages}) => {
       // because HTML cannot be a child of SVG
       xScale={{ type: "band", paddingInner: 0.5 }}
       yScale={{ type: "linear" }}
+      theme={
+        {
+          ...lightTheme,
+          colors: [beColor, faeColor, uiColor]
+        }
+      }
 
     >
       <ChartLegend />
@@ -111,10 +69,9 @@ export const LineChart = ({countPoints, workPackages}) => {
         <AnimatedAxis orientation="bottom" />
         <AnimatedAxis orientation="left" />
         <AnimatedGrid columns={false} numTicks={4} />
-        <AnimatedLineSeries dataKey="BE" data={BE_DATA} {...accessors} />
-        <AnimatedLineSeries dataKey="FAE" data={FAE_DATA} {...accessors} />
-        <AnimatedLineSeries dataKey="UI" data={UI_DATA} {...accessors} />
-
+        <AnimatedLineSeries stroke={beColor} dataKey="BE" data={BE_DATA} {...accessors} />
+        <AnimatedLineSeries stroke={faeColor} dataKey="FAE" data={FAE_DATA} {...accessors} />
+        <AnimatedLineSeries stroke={uiColor} dataKey="UI" data={UI_DATA} {...accessors} />
 
         <Tooltip
           snapTooltipToDatumX

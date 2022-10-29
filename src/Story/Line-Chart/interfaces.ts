@@ -10,9 +10,3 @@ export interface Data {
   y: number
 }
 
-
-export interface WorkPackages {
-  fae: number;
-  be: number;
-  ui: number;
-}

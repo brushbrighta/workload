@@ -29,15 +29,18 @@ code {
 
 /* Entities */
 
-.be {
+.be,
+.BE{
   background: var(--be);
 }
 
-.fae {
+.fae,
+.FAE{
   background: var(--fae);
 }
 
-.ui {
+.ui,
+.UI{
   background: var(--ui);
 }
 
