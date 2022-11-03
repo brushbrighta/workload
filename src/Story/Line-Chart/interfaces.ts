@@ -1,12 +1,11 @@
 export interface AllData {
-  x: number,
-  ui: number,
-  fae: number,
-  be: number,
+  x: number;
+  ui: number;
+  fae: number;
+  be: number;
 }
 
 export interface Data {
-  x: number,
-  y: number
+  x: number;
+  y: number;
 }
-

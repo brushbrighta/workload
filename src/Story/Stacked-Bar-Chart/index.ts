@@ -1,2 +1,1 @@
-export {StackedBarChart} from "./Stacked-Bar-Chart";
-
+export { StackedBarChart } from "./Stacked-Bar-Chart";

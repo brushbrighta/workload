@@ -1,9 +1,9 @@
 /* CSS HEX */
 :root {
-  --dev-ops: #3C153B;
-  --be: #8B1E3F ;
-  --fae: #89BD9E;
-  --ui: #F0C987;
+  --dev-ops: #3c153b;
+  --be: #8b1e3f;
+  --fae: #89bd9e;
+  --ui: #f0c987;
   --bg: #f3f3f3;
   --font: #333;
   --font-light: #838383;
@@ -11,8 +11,8 @@
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -20,27 +20,26 @@ body {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
 @import "Typebase.css";
 
-
 /* Entities */
 
 .be,
-.BE{
+.BE {
   background: var(--be);
 }
 
 .fae,
-.FAE{
+.FAE {
   background: var(--fae);
 }
 
 .ui,
-.UI{
+.UI {
   background: var(--ui);
 }
 
@@ -56,7 +55,7 @@ h1 span {
 }
 .animated-bar > div {
   position: absolute;
-  transition: all .3s;
+  transition: all 0.6s;
 }
 
 /* Layout */
@@ -85,7 +84,7 @@ h1 span {
 }
 
 figure {
-  margin: 1rem 0 0 0 ;
+  margin: 1rem 0 0 0;
   padding: 1rem;
   background: var(--bg);
 }
@@ -95,6 +94,5 @@ figure img {
 }
 
 figure .caption {
-  margin-top: .25rem;
+  margin-top: 0.25rem;
 }
-

@@ -1,2 +1,1 @@
-export {LineChart} from "./Line-Chart";
-
+export { LineChart } from "./Line-Chart";
