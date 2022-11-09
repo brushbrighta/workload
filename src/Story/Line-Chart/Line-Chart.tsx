@@ -7,14 +7,17 @@ import {
   XYChart,
   Tooltip,
   DataProvider,
-  DataContext,
-  buildChartTheme,
   lightTheme,
 } from "@visx/xychart";
 
 import { Data } from "./interfaces";
 import { GewerkSettings } from "../data";
-import { buildDataLinear, buildDataNonLinear } from "./functions";
+import {
+  AllData,
+  buildDataLinear,
+  buildDataNonLinear,
+  buildDataNonLinearPerPerson,
+} from "../functions";
 import { ChartLegend } from "./Chart-Legend";
 
 const accessors = {
@@ -25,16 +28,25 @@ const accessors = {
 export const LineChart = ({
   countPoints,
   workPackages,
-  linear,
+  type,
+  teamSize,
 }: {
   countPoints: number;
   workPackages: GewerkSettings[];
-  linear: boolean;
+  type: "linear" | "real" | "real-per-person";
+  teamSize?: number;
 }) => {
-  const DATA = linear
-    ? buildDataLinear(countPoints, workPackages)
-    : buildDataNonLinear(countPoints, workPackages);
+  const buldyBy = (type): AllData[] => {
+    const dataProvider = {
+      linear: () => buildDataLinear(countPoints, workPackages),
+      real: () => buildDataNonLinear(countPoints, workPackages),
+      "real-per-person": () =>
+        buildDataNonLinearPerPerson(countPoints, workPackages, teamSize),
+    };
+    return dataProvider[type]();
+  };
 
+  const DATA: AllData[] = buldyBy(type);
   const UI_DATA: Data[] = DATA.map((d) => ({
     x: d.x,
     y: d.ui,
@@ -108,7 +120,7 @@ export const LineChart = ({
                     }}
                   >
                     BE:{" "}
-                    {Math.round((tooltipData.datumByKey["BE"].datum as Data).y)}
+                    {(tooltipData.datumByKey["BE"].datum as Data).y.toFixed(2)}
                   </div>
                 )}
                 {tooltipData.datumByKey["FAE"] && (
@@ -118,9 +130,7 @@ export const LineChart = ({
                     }}
                   >
                     FAE:{" "}
-                    {Math.round(
-                      (tooltipData.datumByKey["FAE"].datum as Data).y
-                    )}
+                    {(tooltipData.datumByKey["FAE"].datum as Data).y.toFixed(2)}
                   </div>
                 )}
                 {tooltipData.datumByKey["UI"] && (
@@ -130,7 +140,7 @@ export const LineChart = ({
                     }}
                   >
                     UI:{" "}
-                    {Math.round((tooltipData.datumByKey["UI"].datum as Data).y)}
+                    {(tooltipData.datumByKey["UI"].datum as Data).y.toFixed(2)}
                   </div>
                 )}
               </div>

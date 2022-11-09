@@ -28,13 +28,19 @@ export const StackedBarChart = ({
       {workPackages.map((gewerk, index) => (
         <div
           key={gewerk.nameShort}
-          className={gewerk.nameShort}
+          className={"bar"}
           style={{
             width: `${getWidthPercent(gewerk.value)}%`,
             left: `${getLeftPercent(index, workPackages)}%`,
             height: "100%",
           }}
-        ></div>
+        >
+          <div
+            style={{
+              backgroundColor: gewerk.color,
+            }}
+          ></div>
+        </div>
       ))}
     </div>
   );

@@ -11,19 +11,19 @@ export const gewerkSettings: GewerkSettings[] = [
   {
     name: "Backend",
     nameShort: "BE",
-    color: "#8B1E3F",
-    value: 160,
+    color: "#ff6361",
+    value: 140,
   },
   {
     name: "FAE",
     nameShort: "FAE",
-    color: "#89BD9E",
-    value: 60,
+    color: "#bc5090",
+    value: 70,
   },
   {
     name: "UI",
     nameShort: "UI",
-    color: "#F0C987",
-    value: 40,
+    color: "#003f5c",
+    value: 30,
   },
 ];
