@@ -71,16 +71,16 @@ const Story = () => {
               workPackages={state.workPackages}
               type={"linear"}
             ></LineChart>
-            <p className="caption hug">Lorem ispum Dolor</p>
+            <p className="caption hug">Leider nicht real</p>
           </div>
-          <h3>Realer Projektverlauf</h3>
+          <h3>Realistischer Projektverlauf</h3>
           <div className="block">
             <LineChart
               countPoints={countPoints}
               workPackages={state.workPackages}
               type={"real"}
             ></LineChart>
-            <p className="caption hug">Lorem ispum Dolor</p>
+            <p className="caption hug">Hoffentlich nicht ganz so real</p>
           </div>
           <h3>Arbeitspakete je Person je Gewerk im Verlauf</h3>
           <div className="block">
@@ -90,7 +90,7 @@ const Story = () => {
               teamSize={state.teamSize}
               type={"real-per-person"}
             ></LineChart>
-            {/*<p className="caption hug">Lorem ispum Dolor</p>*/}
+            <p className="caption hug">Nein, so etwas würde niemand tun</p>
           </div>
         </div>
       </div>
