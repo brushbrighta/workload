@@ -4,7 +4,6 @@ import { StackedBarChart } from "./Stacked-Bar-Chart";
 import { gewerkSettings, GewerkSettings } from "./data";
 import { Config } from "./Configure-Workpackages";
 import { Team } from "./Team";
-import { Belastung } from "./Belastung";
 
 interface AppState {
   workPackages: GewerkSettings[];
