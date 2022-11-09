@@ -7,8 +7,17 @@ function App() {
     <div className="App">
       <header className="container" style={{ color: "#fff" }}>
         <h1>Eine Projektplanung</h1>
+
         <p className="lead">
-          Hier eine stark stilisierte, in keinster Weise irgendeiner Realität
+          <span style={{ marginTop: ".3em" }}>
+            Oder:{" "}
+            <span style={{ fontWeight: "bold" }}>
+              Wie Technische Schulden entstehen
+            </span>
+          </span>
+          <br />
+          <br />
+          Eine stark stilisierte, in keinster Weise irgendeiner Realität
           entsprechende, visuelle Darstellung einer an anderer Stelle
           erläuterten These.
         </p>
